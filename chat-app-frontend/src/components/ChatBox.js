@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import messageService from '../services/messages'
 
 const MessageBox = styled.div`
   background: Black;
@@ -43,15 +44,29 @@ const Title = styled.h3`
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([])
-  const [newMessage, setNewMessage] = useState('')
+  const [newContent, setNewContent] = useState('')
+
+  useEffect(() => {
+    messageService.getAll().then(messages =>
+      setMessages( messages )
+    )
+  }, [])
 
   const handleMessageChange = (event) => {
-    setNewMessage(event.target.value)
+    setNewContent(event.target.value)
   }
 
   const sendMessage = () => {
-    setMessages(messages.concat(newMessage))
-    setNewMessage('')
+    const message = {
+      content: newContent,
+      date: Date.now(),
+      user: null
+    }
+    messageService.send(message)
+    .then(returnedMessage => {
+      setMessages(messages.concat(returnedMessage))
+    })
+    setNewContent('')
   }
   
   return (
@@ -59,12 +74,12 @@ const ChatBox = () => {
       <MessageBox>
         <Title>Start Chatting!</Title>
         {messages.map(message => (
-          <div key={message}>
-            <Message>anonymous: <div>{message}</div></Message>
+          <div key={message.id}>
+            <Message>anonymous: <div>{message.content}</div></Message>
           </div>
         ))}
       </MessageBox>
-      <MessageSpan><Textarea value={newMessage} onChange={handleMessageChange}></Textarea><MessageButton onClick={sendMessage}>Send</MessageButton></MessageSpan>
+      <MessageSpan><Textarea value={newContent} onChange={handleMessageChange}></Textarea><MessageButton onClick={sendMessage}>Send</MessageButton></MessageSpan>
     </div>
   )
 }
