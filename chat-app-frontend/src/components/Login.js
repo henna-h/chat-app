@@ -1,22 +1,27 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 //import styled from 'styled-components'
 
-const Login = () => {
+const Login = ({ login }) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
     const handleUsernameChange = (event) => {
-        setUsername(event.target.value)
+      setUsername(event.target.value)
     }
 
     const handlePasswordChange = (event) => {
-        setPassword(event.target.value)
+      setPassword(event.target.value)
     }
 
     const loginUser = (event) => {
-        event.preventDefault()
-        setUsername('')
-        setPassword('')
+      event.preventDefault()
+      try{
+        login(username, password)
+
+      } catch (exception) {
+        console.log('Wrong username or password')
+      }
     }
 
     return (
@@ -33,6 +38,10 @@ const Login = () => {
         </form>
       </div>
     )
+}
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
 }
 
 export default Login

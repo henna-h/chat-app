@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {
   Link
@@ -25,15 +26,24 @@ const Nav = styled.div`
   padding: 0.75em
 `
 
-const Navbar = () => {
-  
+const Navbar = ({ user, logOut }) => {
+
+
   return (
     <Nav>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/">Users</NavLink>
-      <NavLinkRight to="/login">Login</NavLinkRight>
+      {user
+        ? <NavLinkRight onClick={logOut} to="/#">Log out</NavLinkRight>
+        : <NavLinkRight to="/login">Login</NavLinkRight>
+      }
     </Nav>
   )
+}
+
+Navbar.propTypes = {
+  user: PropTypes.object.isRequired,
+  logOut: PropTypes.func.isRequired,
 }
 
 export default Navbar

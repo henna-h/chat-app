@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import messageService from '../services/messages'
 
@@ -42,7 +43,7 @@ const Title = styled.h3`
   color: Ivory;
 `
 
-const ChatBox = () => {
+const ChatBox = ({ user }) => {
   const [messages, setMessages] = useState([])
   const [newContent, setNewContent] = useState('')
 
@@ -57,10 +58,21 @@ const ChatBox = () => {
   }
 
   const sendMessage = () => {
-    const message = {
+
+    let message = null
+
+    if(user == null){
+    message = {
       content: newContent,
       date: Date.now(),
       user: null
+    }
+    } else {
+      message = {
+        content: newContent,
+        date: Date.now(),
+        user: user._id
+      }
     }
     messageService.send(message)
     .then(returnedMessage => {
@@ -82,6 +94,10 @@ const ChatBox = () => {
       <MessageSpan><Textarea value={newContent} onChange={handleMessageChange}></Textarea><MessageButton onClick={sendMessage}>Send</MessageButton></MessageSpan>
     </div>
   )
+}
+
+ChatBox.propTypes = {
+  user: PropTypes.object.isRequired,
 }
 
 export default ChatBox
