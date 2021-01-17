@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build:ui": "rm -rf build && cd ../chat-app-frontend && npm run build --prod && cp -r build ../chat-app-backend/",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,9 +16,11 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.11"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
