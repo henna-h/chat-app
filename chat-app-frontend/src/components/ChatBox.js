@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import messageService from '../services/messages'
+import Message from './message'
 
 const MessageBox = styled.div`
   background: Black;
@@ -11,10 +12,7 @@ const MessageBox = styled.div`
   padding: 1em 2em;
   align-items: center;
 `
-const Message = styled.div`
-  margin: 1em;
-  color: Azure
-`
+
 const MessageSpan = styled.span`
   margin: 1em;
   display: flex;
@@ -47,6 +45,8 @@ const ChatBox = ({ user }) => {
   const [messages, setMessages] = useState([])
   const [newContent, setNewContent] = useState('')
 
+  console.log(user)
+
   useEffect(() => {
     messageService.getAll().then(messages =>
       setMessages( messages )
@@ -58,26 +58,25 @@ const ChatBox = ({ user }) => {
   }
 
   const sendMessage = () => {
+    console.log('user in sendMessage ' + user)
 
     let message = null
 
-    if(user == null){
-    message = {
-      content: newContent,
-      date: Date.now(),
-      user: null
-    }
+    if(user === null){
+      message = {
+        content: newContent,
+        date: Date.now(),
+        user: null
+      }
     } else {
       message = {
         content: newContent,
         date: Date.now(),
-        user: user._id
+        user: user
       }
     }
     messageService.send(message)
-    .then(returnedMessage => {
-      setMessages(messages.concat(returnedMessage))
-    })
+    setMessages(messages.concat(message))
     setNewContent('')
   }
   
@@ -87,7 +86,7 @@ const ChatBox = ({ user }) => {
         <Title>Start Chatting!</Title>
         {messages.map(message => (
           <div key={message.id}>
-            <Message>anonymous: <div>{message.content}</div></Message>
+            <Message user={message.user} content={message.content} />
           </div>
         ))}
       </MessageBox>
@@ -97,7 +96,7 @@ const ChatBox = ({ user }) => {
 }
 
 ChatBox.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.func.isRequired,
 }
 
 export default ChatBox
