@@ -66,7 +66,8 @@ const App = () => {
   }
 
   const register = async (user) => {
-    await userService.create(user) 
+    await userService.create(user)
+    login(user.username, user.password) 
   }
   console.log('user in App: ' + user)
 
