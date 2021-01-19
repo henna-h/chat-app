@@ -17,12 +17,7 @@ const Login = ({ login, users, register }) => {
 
     const loginUser = (event) => {
       event.preventDefault()
-      try{
-        login(username, password)
-
-      } catch (exception) {
-        console.log('Wrong username or password')
-      }
+      login(username, password)
     }
 
     return (

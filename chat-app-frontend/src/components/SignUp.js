@@ -21,31 +21,25 @@ const SignUp = ({ register }) => {
   const registerAndLogin = (event) => {
     event.preventDefault()
     /*
+    const usernames = users.map(user => user.username)
+
 
     if(password1 !== password2){
       return console.log('Make sure password fields match!')
-    }
-
-    if(username.length < 3 || password1.length < 3){
+    } else if(username.length < 3 || password1.length < 3){
       return console.log('Username and password must be at least 3 characters long')
-    }
-
-    const usernames = users.map(user => user.username)
-
-    if(usernames.includes(username)){
+    } else if(usernames.includes(username)){
       return console.log('Username is already taken')
-    }
+    } else {
     */
 
-    const user = {
-      username: username,
-      password: password1,
-    }
+      const user = {
+        username: username,
+        password1: password1,
+        password2: password2,
+      }
 
-    register(user)
-    console.log('after register')
-    
-    //login(username, password1)
+      register(user)
 
   }
 
@@ -69,7 +63,7 @@ const SignUp = ({ register }) => {
 }
 
 SignUp.propTypes = {
-  users: PropTypes.array.isRequired,
+  //users: PropTypes.array.isRequired,
   login: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
 }

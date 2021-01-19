@@ -32,7 +32,6 @@ const Navbar = ({ user, logOut }) => {
   return (
     <Nav>
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/">Users</NavLink>
       {user
         ? <NavLinkRight onClick={logOut} to="/#">Log out</NavLinkRight>
         : <NavLinkRight to="/login">Login</NavLinkRight>

@@ -25,6 +25,7 @@ background: SeaShell
 const App = () => {
   const [user, setUser] = useState(null)
   const [users, setUsers] = useState([])
+  const [notification, setNotification] = useState(null)
   const history = useHistory()
 
   useEffect(() => {
@@ -47,34 +48,64 @@ const App = () => {
 
   const login = async (username, password) => {
     console.log('login')
-    const user = await loginService.login({
-      username, password,
-    })
-  
-    window.localStorage.setItem(
-      'loggedChatAppUser', JSON.stringify(user)
-    )
-  
-    messageService.setToken(user.token)
-    setUser(user)
-    history.push('/')
+
+    try{
+      const user = await loginService.login({
+        username, password,
+      })
+    
+      window.localStorage.setItem(
+        'loggedChatAppUser', JSON.stringify(user)
+      )
+    
+      messageService.setToken(user.token)
+      setUser(user)
+      history.push('/')
+      setNotification("Hi " + user.username + "!")
+      setTimeout(() => {setNotification(null)}, 5*1000)
+    } catch (exception) {
+      setNotification('Wrong username or password')
+      setTimeout(() => {setNotification(null)}, 5*1000)
+    }
   }
 
   const logOut = async () => {
     window.localStorage.removeItem('loggedChatAppUser')
     setUser(null)
+    setNotification("Logged out!")
+    setTimeout(() => {setNotification(null)}, 3*1000)
   }
 
   const register = async (user) => {
-    await userService.create(user)
-    login(user.username, user.password) 
+
+    const usernames = users.map(user => user.username)
+
+    if(usernames.includes(user.username)){
+      setNotification('Username is already taken')
+    } else if(user.username.length < 3 || user.password1.length < 3){
+      setNotification('Username and password must be at least 3 characters long')
+    } else if(user.password1 !== user.password2){
+      setNotification('Make sure password fields match!')
+    } else {
+
+      setTimeout(() => {setNotification(null)})
+
+      const newUser = {
+        username: user.username,
+        password: user.password1,
+      }
+
+      await userService.create(newUser)
+
+      login(newUser.username, newUser.password) 
+
+    }
   }
-  console.log('user in App: ' + user)
 
   return (
     <div>
       <Navbar user={user} logOut={logOut} />
-      <Notification message="hello" />
+      <Notification message={notification} />
       <Wrapper>
         <Switch>
         <Route path="/login">

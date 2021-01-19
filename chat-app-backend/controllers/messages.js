@@ -39,7 +39,7 @@ messagesRouter.post('/', async (request, response, next) => {
     const message = new Message({
       content: body.content,
       user: user._id,
-      date: Date.now()
+      date: new Date()
     })
     
     try {
@@ -56,7 +56,7 @@ messagesRouter.post('/', async (request, response, next) => {
     const message = new Message({
       content: body.content,
       user: null,
-      date: Date.now()
+      date: new Date()
     })
 
     try {

@@ -2,6 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+const MessageUser = styled.div`
+  margin: 1em;
+  color: PowderBlue;
+  border-style: none none solid none;
+`
+
 const MessageText = styled.div`
   margin: 1em;
   color: Azure
@@ -11,19 +17,26 @@ const Message = ({ content, user }) => {
     if(user && user !== null){
         console.log(user.username)
         return(
-          <MessageText>{user.username}: {content}</MessageText>
+           <div>
+            <MessageUser>{user.username}:</MessageUser>
+            <MessageText>{content}</MessageText>
+          </div>
         )
     } else {
         return(
-          <MessageText>anonymous: {content}</MessageText>
+        <div>
+          <MessageUser>anonymous:</MessageUser>
+          <MessageText>{content}</MessageText>
+        </div>
         )
     }
 
 }
 
 Message.propTypes = {
-    content: PropTypes.String.isRequired,
+    content: PropTypes.string.isRequired,
     user: PropTypes.object.isRequired,
+    //time: PropTypes.object.isRequired,
   }
 
 export default Message

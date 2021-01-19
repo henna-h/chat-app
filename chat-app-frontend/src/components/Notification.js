@@ -6,11 +6,11 @@ const Noti = styled.div`
   background: Azure
   padding: 1em
   position: relative;
-  margin: 0.25em 4em;
+  margin: 0.25em 1em;
 `
 
 const NotiText = styled.h1`
-  padding: 1em
+  padding: 0.25em
 `
 
 const Notification = ({ message }) => {
@@ -26,7 +26,7 @@ const Notification = ({ message }) => {
 }
 
 Notification.propTypes = {
-  message: PropTypes.String.isRequired,
+  message: PropTypes.string.isRequired,
 }
 
 export default Notification
