@@ -17,6 +17,7 @@ import {
 const Wrapper = styled.div`
 position: relative;
 width: 100%;
+height: 100%;
 align-items: center;
 padding: 4em;
 background: SeaShell
@@ -39,15 +40,12 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
-      console.log('setUser:' + user)
       messageService.setToken(user.token)
-      console.log("logged in user: " + user.username)
     }
   }, [])
 
 
   const login = async (username, password) => {
-    console.log('login')
 
     try{
       const user = await loginService.login({

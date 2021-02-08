@@ -32,22 +32,21 @@ const MessageSpan = styled.span`
 const Textarea = styled.textarea`
   width: 18em;
   height: 5em;
-  background: Azure;
+  background: white;
   color: black;
   overflow: scroll;
 `
 
 const MessageButton = styled.button`
-  color: DarkCyan;
-  background: Ivory;
+  color: Black;
+  background: PowderBlue;;
   font-size: 1em;
   padding: 1em;
   border: none;
-  border: 0.25em solid PowderBlue;
 `
 
 const Title = styled.h3`
-  color: Ivory;
+  color: white;
   
 `
 

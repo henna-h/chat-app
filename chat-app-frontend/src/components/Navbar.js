@@ -8,7 +8,7 @@ import {
 const NavLink = styled(Link)`
   padding: 0.25em;
   font-size: 1em;
-  color: Azure;
+  color: white;
   font-weight: bold;
 `
 
@@ -17,7 +17,7 @@ const NavLinkRight = styled(Link)`
   position: absolute;
   right: 1em;
   font-size: 1em;
-  color: Azure;
+  color: white;
   font-weight: bold;
 `
 

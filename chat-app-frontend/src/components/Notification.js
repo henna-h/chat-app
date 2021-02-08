@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Noti = styled.div`
-  background: Azure
+  background: white
   padding: 1em
   position: relative;
   margin: 0.25em 1em;

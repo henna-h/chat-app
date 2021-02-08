@@ -1,1 +1,1 @@
-This is a simple chat app I am working on to sharpen my skills in Node and React. This project is still in process.
+This is a simple chat app made using React, Node.js and MongoDB.

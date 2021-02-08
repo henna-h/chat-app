@@ -10,7 +10,7 @@ const MessageUser = styled.div`
 
 const MessageText = styled.div`
   margin: 1em;
-  color: Azure
+  color: white;
 `
 
 const Message = ({ content, user }) => {
