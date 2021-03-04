@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 messagesRouter.use(bodyParser.json())
 const jwt = require('jsonwebtoken')
 
-//token
+
 const getTokenFrom = request => {
   const authorization = request.get('authorization')
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
@@ -20,9 +20,6 @@ messagesRouter.get('/', async (request, response) => {
 
   response.json(messages.map(message => message.toJSON()))
 })
-
-
-//DOES NOT WORK!!!
 
 messagesRouter.post('/', async (request, response, next) => {
   const body = request.body

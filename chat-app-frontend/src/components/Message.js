@@ -3,14 +3,28 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const MessageUser = styled.div`
-  margin: 1em;
-  color: PowderBlue;
-  border-style: none none solid none;
+  margin: 0.5em;
+  color: White;
+  font: 14px/22px "Lato", Arial, sans-serif;
+`
+const Triangle = styled.div`
+  width: 0; 
+  height: 0;
+  margin-left: 5%;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid PowderBlue;
 `
 
 const MessageText = styled.div`
-  margin: 1em;
-  color: white;
+  width: 90%;
+  border: none;
+  padding: 10px 20px;
+  font: 14px/22px "Lato", Arial, sans-serif;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  resize: none;
+  background: PowderBlue;
 `
 
 const Message = ({ content, user }) => {
@@ -18,14 +32,16 @@ const Message = ({ content, user }) => {
         console.log(user.username)
         return(
            <div>
-            <MessageUser>{user.username}:</MessageUser>
+            <MessageUser>{user.username}</MessageUser>
+            <Triangle />
             <MessageText>{content}</MessageText>
           </div>
         )
     } else {
         return(
         <div>
-          <MessageUser>anonymous:</MessageUser>
+          <MessageUser>anonymous</MessageUser>
+          <Triangle />
           <MessageText>{content}</MessageText>
         </div>
         )

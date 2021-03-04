@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Login from './components/Login'
+import SignUp from './components/SignUp'
 import Navbar from './components/Navbar'
 import ChatBox from './components/ChatBox'
 import Notification from './components/Notification'
@@ -15,12 +16,12 @@ import {
 } from "react-router-dom"
 
 const Wrapper = styled.div`
-position: relative;
-width: 100%;
-height: 100%;
-align-items: center;
-padding: 4em;
-background: SeaShell
+  position: relative;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding: 0em;
+  background: white;
 `
 
 const App = () => {
@@ -102,14 +103,20 @@ const App = () => {
 
   return (
     <div>
+      <Wrapper>
       <Navbar user={user} logOut={logOut} />
       <Notification message={notification} />
-      <Wrapper>
         <Switch>
         <Route path="/login">
           {user 
             ? <Redirect to="/" />
             : <Login login={login} register={register} users={users} /> 
+          }
+          </Route>
+          <Route path="/signup">
+          {user 
+            ? <Redirect to="/" />
+            : <SignUp login={login} register={register} users={users} /> 
           }
           </Route>
           <Route path="/">

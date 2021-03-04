@@ -2,30 +2,45 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+
+const FormContainer = styled.div`
+position: relative;
+margin-top: 4em;
+margin-left: 37%;
+padding: 1em 2em;
+align-items: center;
+display: block;
+`
+
 const Form = styled.form`
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
   align-items: center;
 `
 
 const FormButton = styled.button`
   font-size: 1em;
+  font: 14px/22px "Lato", Arial, sans-serif;
   margin: 1em;
   padding: 0.25em 1em;
-  border-radius: 3px;
+  border-radius: 5px;
   border: 2px solid;
   color: white;
   background: black;
-`;
+  &:hover ${FormButton} {
+    color: PowderBlue;
+  }
+`
 
 const FormInput = styled.input`
   padding: 0.5em;
   margin: 0.5em;
-  background: white;
+  background: LightGray;
   border: none;
   border-radius: 3px;
-`;
+`
+
+const H2 = styled.h2`
+  font: "Lato", Arial, sans-serif;
+`
 
 
 const SignUp = ({ register }) => {
@@ -60,19 +75,21 @@ const SignUp = ({ register }) => {
 
   return(
     <div>
-      <Form>
-      <h3>No account? Sign up!</h3>
-        <div>
-          <FormInput value={username} onChange={handleNewUsernameChange} placeholder='username' />
-        </div>
-        <div>
-          <FormInput type='password' value={password1} onChange={handlePassword1Change} placeholder='password' />
-        </div>
-        <div>
-          <FormInput type='password' value={password2} onChange={handlePassword2Change} placeholder='repeat password' />
-        </div>
-        <FormButton onClick={registerAndLogin} type='submit'>Sign up</FormButton>
-      </Form>
+      <FormContainer>
+        <Form>
+          <H2>No account? Sign up!</H2>
+          <div>
+            <FormInput value={username} onChange={handleNewUsernameChange} placeholder='username' />
+          </div>
+          <div>
+            <FormInput type='password' value={password1} onChange={handlePassword1Change} placeholder='password' />
+          </div>
+          <div>
+            <FormInput type='password' value={password2} onChange={handlePassword2Change} placeholder='repeat password' />
+          </div>
+          <FormButton onClick={registerAndLogin} type='submit'>Sign up</FormButton>
+        </Form>
+      </FormContainer>
     </div>
   )
 }

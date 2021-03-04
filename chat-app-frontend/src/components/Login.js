@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import SignUp from './SignUp'
 import styled from 'styled-components'
 
 
 const FormContainer = styled.div`
-  margin-left: 35%;
-  margin-right: 35%;
-  align-items: center;
+position: relative;
+margin-top: 4em;
+margin-left: 37%;
+padding: 1em 2em;
+align-items: center;
+display: block;
 `
 
 const Form = styled.form`
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
   align-items: center;
 `
 
@@ -21,22 +20,29 @@ const FormButton = styled.button`
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
-  border-radius: 3px;
+  border-radius: 5px;
   border: 2px solid;
   color: white;
   background: black;
-`;
+  &:hover ${FormButton} {
+    color: PowderBlue;
+  }
+`
 
 const FormInput = styled.input`
   padding: 0.5em;
   margin: 0.5em;
-  background: white;
+  background: LightGray;
   border: none;
   border-radius: 3px;
-`;
+`
 
+const H2 = styled.h2`
+  font: "Lato", Arial, sans-serif;
 
-const Login = ({ login, users, register }) => {
+`
+
+const Login = ({ login }) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
@@ -56,7 +62,7 @@ const Login = ({ login, users, register }) => {
     return (
       <FormContainer>
         <Form>
-        <h3>Sign in!</h3>
+        <H2>Sign in!</H2>
           <div>
             <FormInput value={username} onChange={handleUsernameChange} placeholder='username' />
           </div>
@@ -65,8 +71,7 @@ const Login = ({ login, users, register }) => {
           </div>
             <FormButton onClick={loginUser} type='submit'>Login</FormButton>
         </Form>
-
-        <SignUp login={login} users={users} register={register} />
+        <a href="/#/signup">No account? Sign up?</a>
       </FormContainer>
     )
 }

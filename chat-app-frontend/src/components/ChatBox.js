@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import messageService from '../services/messages'
@@ -6,20 +6,22 @@ import Message from './Message'
 
 const MessageBox = styled.div`
   background: Black;
-  width: 20em;
+  width: 30em;
   height: 35em;
   position: relative;
-  right: 5em;
+  margin-top: 4em;
   margin-left: auto;
   margin-right: auto;
   padding: 1em 2em;
   align-items: center;
+  display: block;
+  border-radius: 5px;
 `
 
 const Messages = styled.div`
   overflow: scroll;
-  width: 20em;
-  height: 25em;
+  width: 29em;
+  height: 30em;
   padding-bottom: 1em;
 `
 
@@ -30,37 +32,50 @@ const MessageSpan = styled.span`
 `
 
 const Textarea = styled.textarea`
-  width: 18em;
-  height: 5em;
-  background: white;
-  color: black;
-  overflow: scroll;
+  width: 20em;
+  min-height: 4.5em;
+  border: none;
+  padding: 10px 20px;
+  font: 14px/22px "Lato", Arial, sans-serif;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  resize: none;
 `
 
 const MessageButton = styled.button`
+  height: 4.5em;
   color: Black;
   background: PowderBlue;;
   font-size: 1em;
   padding: 1em;
   border: none;
-`
-
-const Title = styled.h3`
-  color: white;
-  
+  border-radius: 5px;
+  &:hover ${MessageButton} {
+    background: DarkCyan;
+  }
+  }
 `
 
 const ChatBox = ({ user }) => {
   const [messages, setMessages] = useState([])
   const [newContent, setNewContent] = useState('')
 
-  console.log(user)
+  const messagesEndRef = useRef(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
 
   useEffect(() => {
     messageService.getAll().then(messages =>
       setMessages( messages )
     )
   }, [])
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages]);
+
 
   const handleMessageChange = (event) => {
     setNewContent(event.target.value)
@@ -91,13 +106,13 @@ const ChatBox = ({ user }) => {
   return (
     <div>
       <MessageBox>
-        <Title>Start Chatting!</Title>
         <Messages>
         {messages.map(message => (
           <div key={message.id}>
             <Message user={message.user} content={message.content} />
           </div>
         ))}
+        <div ref={messagesEndRef} />
         </Messages>
       <MessageSpan>
         <Textarea value={newContent} onChange={handleMessageChange}></Textarea>

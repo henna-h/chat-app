@@ -3,22 +3,19 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Noti = styled.div`
-  background: white
-  padding: 1em
-  position: relative;
-  margin: 0.25em 1em;
-`
-
-const NotiText = styled.h1`
+  border: 1px solid DarkCyan;
+  background-color: PowderBlue;
+  color: Black;
+  font: 14px/22px "Lato", Arial, sans-serif;
+  transition:0.5s;
+  cursor:pointer;
   padding: 0.25em
 `
 
 const Notification = ({ message }) => {
   if(message !== null){
     return (
-      <Noti>
-          <NotiText>{message}</NotiText>
-      </Noti>
+      <Noti>{message}</Noti>
     )
   }
   
