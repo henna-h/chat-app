@@ -13,7 +13,9 @@ display: block;
 `
 
 const Form = styled.form`
+  display: inline-block;
   align-items: center;
+  text-align: center;
 `
 
 const FormButton = styled.button`
@@ -25,6 +27,7 @@ const FormButton = styled.button`
   border: 2px solid;
   color: white;
   background: black;
+  float: center;
   &:hover ${FormButton} {
     color: PowderBlue;
   }
@@ -33,13 +36,15 @@ const FormButton = styled.button`
 const FormInput = styled.input`
   padding: 0.5em;
   margin: 0.5em;
-  background: LightGray;
+  background: white;
   border: none;
   border-radius: 3px;
+  box-shadow: inset 0 0 1.7px;
 `
 
 const H2 = styled.h2`
   font: "Lato", Arial, sans-serif;
+  float: center;
 `
 
 
@@ -77,7 +82,7 @@ const SignUp = ({ register }) => {
     <div>
       <FormContainer>
         <Form>
-          <H2>No account? Sign up!</H2>
+          <H2>Create an account!</H2>
           <div>
             <FormInput value={username} onChange={handleNewUsernameChange} placeholder='username' />
           </div>

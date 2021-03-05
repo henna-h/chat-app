@@ -16,12 +16,9 @@ import {
 } from "react-router-dom"
 
 const Wrapper = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  padding: 0em;
-  background: white;
+  width: 100vw;
+  min-height: 100vh;
+  background: WhiteSmoke;
 `
 
 const App = () => {

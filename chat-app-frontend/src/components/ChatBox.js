@@ -5,34 +5,38 @@ import messageService from '../services/messages'
 import Message from './Message'
 
 const MessageBox = styled.div`
-  background: Black;
+  background: White;
   width: 30em;
-  height: 35em;
+  height: 38em;
   position: relative;
   margin-top: 4em;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 5em;
   padding: 1em 2em;
   align-items: center;
   display: block;
+  border: 1.5px solid Grey;
   border-radius: 5px;
 `
 
 const Messages = styled.div`
-  overflow: scroll;
-  width: 29em;
-  height: 30em;
-  padding-bottom: 1em;
+  overflow-y: scroll;
+  width: 27em;
+  height: 33em;
+  padding-bottom: 2em;
+  padding-right: 1.5em;
 `
 
 const MessageSpan = styled.span`
+  width: 25em;
   position: absolute;
   bottom: 0.5em;
   display:inline-flex;
 `
 
 const Textarea = styled.textarea`
-  width: 20em;
+  width: 21em;
   min-height: 4.5em;
   border: none;
   padding: 10px 20px;
@@ -40,6 +44,7 @@ const Textarea = styled.textarea`
   margin-bottom: 10px;
   border-radius: 5px;
   resize: none;
+  box-shadow: inset 0 0 1.7px;
 `
 
 const MessageButton = styled.button`
@@ -85,21 +90,24 @@ const ChatBox = ({ user }) => {
 
     let message = null
 
-    if(user === null){
-      message = {
-        content: newContent,
-        date: Date.now(),
-        user: null
+    if(newContent && newContent != null && newContent.replace(/\s/g, '').length > 0){
+      if(user === null){
+        message = {
+          content: newContent,
+          date: Date.now(),
+          user: null
+        }
+      } else {
+        message = {
+          content: newContent,
+          date: Date.now(),
+          user: user
+        }
       }
-    } else {
-      message = {
-        content: newContent,
-        date: Date.now(),
-        user: user
-      }
+      messageService.send(message)
+      setMessages(messages.concat(message))
     }
-    messageService.send(message)
-    setMessages(messages.concat(message))
+
     setNewContent('')
   }
   
@@ -109,7 +117,7 @@ const ChatBox = ({ user }) => {
         <Messages>
         {messages.map(message => (
           <div key={message.id}>
-            <Message user={message.user} content={message.content} />
+            <Message date={message.date} user={message.user} content={message.content} />
           </div>
         ))}
         <div ref={messagesEndRef} />

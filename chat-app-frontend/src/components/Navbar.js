@@ -32,6 +32,7 @@ const Nav = styled.div`
   width: 100%;
   background: black;
   padding: 0.75em;
+  box-shadow: 0px 0px 6px;
 `
 
 
@@ -42,8 +43,8 @@ const Navbar = ({ user, logOut }) => {
     <Nav>
       <NavLink to="/"> <i className="big white home icon"/> </NavLink>
       {user
-        ? <NavLinkRight onClick={logOut} to="/#"><i className="big white sign-in icon"/></NavLinkRight>
-        : <NavLinkRight to="/login"><i className="big white sign-out icon"/></NavLinkRight>
+        ? <NavLinkRight onClick={logOut} to="/#"><i className="big white sign-out icon"/></NavLinkRight>
+        : <NavLinkRight to="/login"><i className="big white sign-in icon"/></NavLinkRight>
       }
     </Nav>
   )
