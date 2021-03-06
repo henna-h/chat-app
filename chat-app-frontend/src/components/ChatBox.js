@@ -7,7 +7,7 @@ import Message from './Message'
 const MessageBox = styled.div`
   background: White;
   width: 30em;
-  height: 38em;
+  height: 39em;
   position: relative;
   margin-top: 4em;
   margin-left: auto;
@@ -23,7 +23,7 @@ const MessageBox = styled.div`
 const Messages = styled.div`
   overflow-y: scroll;
   width: 27em;
-  height: 33em;
+  height: 32em;
   padding-bottom: 2em;
   padding-right: 1.5em;
 `
@@ -33,6 +33,7 @@ const MessageSpan = styled.span`
   position: absolute;
   bottom: 0.5em;
   display:inline-flex;
+  padding-top: 1em;
 `
 
 const Textarea = styled.textarea`

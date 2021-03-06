@@ -1,1 +1,0 @@
-This is a simple chat app I am working on to sharpen my skills in Nodejs and React. In addition to a chat it also contains login and registration functions. This project is still in progress.

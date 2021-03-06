@@ -12,8 +12,6 @@ usersRouter.post('/', async (request, response, next) => {
     const users = await User.find({})
     const usernames = users.map(user=> user.username)
     const body = request.body
-
-    console.log('users: ' + users)
   
     if(body.password.length < 3){
       return response.status(400).json({ error: 'password must be at least 3 characters long' })
